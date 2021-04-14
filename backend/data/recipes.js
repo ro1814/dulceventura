@@ -33,4 +33,4 @@ const recipes = [
     numReviews: 5
   }
 ];
- export default recipes
+export default recipes

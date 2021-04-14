@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
-import recipes from "../recipes";
+
 
 const RecipeScreen = ({ match }) => {
-  const recipe = recipes.find((r) => r._id === match.params.id);
+  const [recipe, setRecipe ] = useState({})
+
+  useEffect(() =>{
+    const fetchRecipe = async () => {
+        const { data } = await axios.get(`/api/recipes/${match.params.id}`)
+
+        setRecipe(data)
+    }
+
+    fetchRecipe()
+},[ match ])
+
   return (
     <>
       <Link className="btn btn-dark my-3" to="/" style={{color: "#F55A00"}}>
@@ -32,9 +44,11 @@ const RecipeScreen = ({ match }) => {
                 value={recipe.rating}
                 text={`${recipe.numReviews} comentarios`}
               />
-              <Button className='btn-block' type='button' style={{color: "#F55A00"}}>
+              <div>
+              <Button className='btn btn-dark btn-block' type='button' style={{color: "#F55A00"}}>
                   Agregar a favoritos
               </Button>
+              </div>
             </ListGroup.Item>
             <ListGroup.Item>
                 <h4>Ingredientes:</h4>
