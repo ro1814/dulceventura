@@ -1,20 +1,20 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Card } from 'react-bootstrap'
+import Rating from './Rating'
 
 const Recipe = ({ recipe }) => {
     return (
         <Card className='my-3 p-3 rounded'>
-            <a href={`/recipe/${recipe._id}`}>
+            <Link to={`/recipe/${recipe._id}`}>
                 <Card.Img src= {recipe.image} variant='top' />
-            </a>
+            </Link>
             <Card.Body>
-            <a href={`/recipe/${recipe._id}`}>
+            <Link to={`/recipe/${recipe._id}`}>
                 <Card.Title as='div'> <strong>Receta: {recipe.name}</strong></Card.Title>
-            </a>
+            </Link>
             <Card.Text as='div'>
-            <div className='my-3'>
-            Puntuación: {recipe.rating} de {recipe.numReviews} Comentarios.
-            </div>
+            <Rating value = {recipe.rating} text = {` ${recipe.numReviews} comentarios`}/>
             </Card.Text>
             
             </Card.Body>
