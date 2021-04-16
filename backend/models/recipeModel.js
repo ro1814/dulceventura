@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 
 const reviewSchema = mongoose.Schema({
-    name: { type: String, required:true },
-    rating: { type: Number, required:true },
-    comment: { type: String, required:true }
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true }
 }, {
     timestamps: true,
 })
@@ -33,27 +33,21 @@ const recipeSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    ingredientes: [
-        {
-            name: String,
-            quantity: String,
-            image: String
+    ingredients: {
+            type: String,
+            required: true,
         },
-        {timestamps: true}
-    ],
-    instructions: [
+    instructions:
         {
-            heading: String,
-            steps: String
+            type: String,
+            required: true
         },
-        {timestamps: true}
-    ],
     rating: {
         type: Number,
         required: true,
         default: 0
     },
-    reviews: [reviewsSchema],
+    reviews: [reviewSchema],
     numReviews: {
         type: Number,
         required: true,
