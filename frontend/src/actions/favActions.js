@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FAV_ADD_ITEM } from '../constants/favConstant'
+import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstant'
 
 export const addToFav = ( id ) => async ( dispatch, getState ) => {
     const { data } = await axios.get(`/api/recipes/${id}`)
@@ -13,5 +13,13 @@ export const addToFav = ( id ) => async ( dispatch, getState ) => {
         }
     })
 
+    localStorage.setItem('favItems', JSON.stringify(getState().fav.favItems))
+}
+
+export const removeFromFav = (id) => (dispatch, getState) => {
+    dispatch({
+        type: FAV_REMOVE_ITEM,
+        payload: id
+    })
     localStorage.setItem('favItems', JSON.stringify(getState().fav.favItems))
 }

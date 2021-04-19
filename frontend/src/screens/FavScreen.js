@@ -11,7 +11,7 @@ import {
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { addToFav } from "../actions/favActions";
+import { addToFav, removeFromFav } from "../actions/favActions";
 
 const FavScreen = ({ match, history }) => {
   const recipeId = match.params.id;
@@ -28,7 +28,7 @@ const FavScreen = ({ match, history }) => {
   }, [dispatch, recipeId]);
 
   const removeFromFavHandler = (id) => {
-      console.log('remove');
+      dispatch(removeFromFav(id));
   }
 
   return (

@@ -26,7 +26,7 @@ export const recipeDetailsReducer = (
 ) => {
   switch (action.type) {
     case RECIPE_DETAILS_REQUEST:
-      return { loading: true, ...state };
+      return {...state, loading: true };
     case RECIPE_DETAILS_SUCCESS:
       return { loading: false, recipe: action.payload };
     case RECIPE_DETAILS_FAIL:

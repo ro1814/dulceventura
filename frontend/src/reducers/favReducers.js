@@ -1,4 +1,4 @@
-import { FAV_ADD_ITEM } from '../constants/favConstant'
+import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstant'
 
 export const favReducer = (state = {favItems: [] }, action) => {
     switch( action.type ) {
@@ -17,6 +17,11 @@ export const favReducer = (state = {favItems: [] }, action) => {
                     favItems: [...state.favItems, item]
                 }
             }
+            case FAV_REMOVE_ITEM:
+                return{
+                    ...state,
+                    favItems: state.favItems.filter((x) => x.recipe !== action.payload)
+                }
         default:
             return state
     }
