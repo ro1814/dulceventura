@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Row, Col } from 'react-bootstrap'
-import Recipe from '../components/Recipe'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Row, Col } from "react-bootstrap";
+import Recipe from "../components/Recipe";
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listRecipes } from "../actions/recipeActions";
 
 const HomeScreen = () => {
-    const [ recipes, setRecipes ] = useState([])
+  const dispatch = useDispatch();
 
-    useEffect(() =>{
-        const fetchRecipes = async() => {
-            const {data} = await axios.get('/api/recipes')
+  const recipeList = useSelector((state) => state.recipeList);
+  const { loading, error, recipes } = recipeList;
 
-            setRecipes(data)
-        }
+  useEffect(() => {
+    dispatch(listRecipes());
+  }, [dispatch]);
 
-        fetchRecipes()
-    }, [])
+  return (
+    <>
+      <h1>Últimas recetas</h1>
+      {loading ? (
+        <Loader/>
+      ) : error ? (
+        <Message variant = 'danger'>{error}</Message>
+      ) : (
+        <Row>
+          {recipes.map((recipe) => (
+            <Col key={recipe._id} sm={12} md={6} lg={4} xl={3}>
+              <Recipe recipe={recipe} />
+            </Col>
+          ))}
+        </Row>
+      )}
+    </>
+  );
+};
 
-    return (
-        <>
-            <h1>Últimas recetas</h1>
-            <Row>
-                {recipes.map((recipe) => (
-                    <Col key={recipe._id}sm={12} md={6} lg={4} xl={3}>
-                        <Recipe recipe={recipe}/>
-                    </Col>
-                ))}
-            </Row>
-            
-        </>
-    )
-}
-
-export default HomeScreen
+export default HomeScreen;
