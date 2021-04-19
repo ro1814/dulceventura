@@ -7,15 +7,23 @@ import { listRecipeDetails } from "../actions/recipeActions";
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-const RecipeScreen = ({ match }) => {
+
+const RecipeScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const recipeDetails = useSelector((state) => state.recipeDetails);
   const { loading, error, recipe } = recipeDetails;
 
+
   useEffect(() => {
     dispatch(listRecipeDetails(match.params.id));
+
   }, [dispatch, match]);
+
+  const addToFavHandler = () => {
+    history.push(`/fav/${match.params.id}`)
+
+  }
 
   return (
     <>
@@ -50,6 +58,7 @@ const RecipeScreen = ({ match }) => {
                 />
                 <div>
                   <Button
+                    onClick = {addToFavHandler}
                     className="btn btn-dark btn-block"
                     type="button"
                     style={{ color: "#F55A00" }}

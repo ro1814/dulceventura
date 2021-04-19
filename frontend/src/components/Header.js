@@ -14,7 +14,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/likes">
+              <LinkContainer to="/fav">
                 <Nav.Link>
                   <i className="far fa-star"></i> Favoritos
                 </Nav.Link>
