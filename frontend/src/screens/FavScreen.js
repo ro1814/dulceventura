@@ -35,7 +35,7 @@ const FavScreen = ({ match, history }) => {
     <Row>
       <Col md={8}>
           <h1>Favoritos</h1>
-          {favItems.length === 0 ? (<Message>Tu lista de favoritos está vacía. <Link to ='/'>Regresa </Link> </Message>) : (
+          {favItems.length === 0 ? (<Message> <strong> Tu lista de favoritos está vacía.</strong> <Link to ='/'>Regresa </Link> </Message>) : (
               <ListGroup variant = 'flush'>{favItems.map(item=> (
                   <ListGroup.Item key={item.recipe}>
                       <Row>
