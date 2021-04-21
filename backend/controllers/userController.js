@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if(userExists) {
     res.status(400)
-    throw new Error('EL usuario ya existe')
+    throw new Error('El usuario ya existe.')
   }
 
   const user = await User.create({
@@ -81,8 +81,40 @@ const getUserProfile = asyncHandler(async (req, res) => {
       })
   } else {
     res.status(404)
-    throw new Error('Usuario no encontrado')
+    throw new Error('Usuario no encontrado.')
   }
 });
 
-export { authUser, registerUser, getUserProfile };
+// @desc Update user profile
+// @route PUT /api/users/profile
+// @access Private
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if(user){
+     user.name = req.body.name || user.name
+     user.email = req.body.email || user.email
+     user.avatar = req.body.avatar || user.avatar
+     if(req.body.password) {
+        user.password = req.body.password
+     }
+
+     const updatedUser = await user.save()
+
+     res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+      avatar: updatedUser.avatar
+  })
+     
+  } else {
+    res.status(404)
+    throw new Error('Usuario no encontrado.')
+  }
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile };
