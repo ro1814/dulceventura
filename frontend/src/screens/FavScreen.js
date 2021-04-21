@@ -6,9 +6,7 @@ import {
   Col,
   ListGroup,
   Image,
-  Form,
   Button,
-  Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToFav, removeFromFav } from "../actions/favActions";

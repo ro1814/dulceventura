@@ -1,4 +1,4 @@
-import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstant'
+import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstants'
 
 export const favReducer = (state = {favItems: [] }, action) => {
     switch( action.type ) {

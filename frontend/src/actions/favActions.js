@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstant'
+import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from '../constants/favConstants'
 
 export const addToFav = ( id ) => async ( dispatch, getState ) => {
     const { data } = await axios.get(`/api/recipes/${id}`)
