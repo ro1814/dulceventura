@@ -8,6 +8,8 @@ import { Container } from "react-bootstrap";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from './screens/ProfileScreen'
+import UserListScreen from './screens/UserListScreen'
+import UserEditScreen from './screens/UserEditScreen'
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/recipe/:id" component={RecipeScreen} />
           <Route path="/fav/:id?" component={FavScreen} />
+          <Route path="/admin/userlist" component={UserListScreen} />
+          <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

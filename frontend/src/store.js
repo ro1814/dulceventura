@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { recipeListReducer, recipeDetailsReducer } from './reducers/recipeReducers' 
 import { favReducer } from './reducers/favReducers'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers'
  
 const reducer = combineReducers({
     recipeList: recipeListReducer,
@@ -13,6 +13,9 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    userList: userListReducer,
+    userDelete: userDeleteReducer,
+    userUpdate: userUpdateReducer,
 })
 
 const favItemsFromStorage = localStorage.getItem('favItems') ? JSON.parse(localStorage.getItem('favItems')) : []
