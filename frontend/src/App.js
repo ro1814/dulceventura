@@ -10,6 +10,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from './screens/ProfileScreen'
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
+import RecipeListScreen from "./screens/RecipeListScreen";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/fav/:id?" component={FavScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+          <Route path="/admin/recipelist" component={RecipeListScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

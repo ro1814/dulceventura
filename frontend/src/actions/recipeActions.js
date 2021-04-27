@@ -6,6 +6,12 @@ import {
   RECIPE_DETAILS_REQUEST,
   RECIPE_DETAILS_SUCCESS,
   RECIPE_DETAILS_FAIL,
+  RECIPE_DELETE_REQUEST,
+  RECIPE_DELETE_SUCCESS,
+  RECIPE_DELETE_FAIL,
+  RECIPE_CREATE_REQUEST,
+  RECIPE_CREATE_SUCCESS,
+  RECIPE_CREATE_FAIL
 } from "../constants/recipeConstants";
 
 export const listRecipes = () => async (dispatch) => {
@@ -49,3 +55,72 @@ export const listRecipeDetails = (id) => async (dispatch) => {
       });
     }
   };
+
+  export const deleteRecipe = (id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: RECIPE_DELETE_REQUEST,
+      })
+  
+      const {
+        userLogin: { userInfo },
+      } = getState()
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+  
+      await axios.delete(`/api/recipes/${id}`, config)
+  
+      dispatch({
+        type: RECIPE_DELETE_SUCCESS,
+      })
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      if (message === 'Not autorizado token fallido.') 
+      dispatch({
+        type: RECIPE_DELETE_FAIL,
+        payload: message,
+      })
+    }
+  }
+
+  export const createRecipe = () => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: RECIPE_CREATE_REQUEST,
+      })
+  
+      const {
+        userLogin: { userInfo },
+      } = getState()
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+  
+      const { data } = await axios.post(`/api/recipes/`, {}, config)
+  
+      dispatch({
+        type: RECIPE_CREATE_SUCCESS,
+        payload: data
+      })
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      if (message === 'Not autorizado token fallido.') 
+      dispatch({
+        type: RECIPE_CREATE_FAIL,
+        payload: message,
+      })
+    }
+  }
