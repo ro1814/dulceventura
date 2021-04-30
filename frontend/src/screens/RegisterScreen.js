@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
@@ -14,6 +15,7 @@ const RegisterScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [uploading, setUploading ] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -27,6 +29,33 @@ const RegisterScreen = ({ location, history }) => {
       history.push(redirect);
     }
   }, [history, userInfo, redirect]);
+
+  const uploadFileHandler = async(e) =>{
+    const file = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append('image', file)
+
+    setUploading(true)
+
+    try {
+      const config = { 
+        headers : {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setAvatar(data)
+      setUploading(false)
+      
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+    
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -86,14 +115,17 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="avatar">
-          <Form.Label>Foto de perfil</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Foto de Perfil"
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+            <Form.Label>Foto de perfil</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Foto de perfil"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+            ></Form.Control>
+            <Form.File id='avatar-file' label='Escoge la foto' custom onChange={uploadFileHandler}> 
+            </Form.File>
+            {uploading && <Loader/>}
+          </Form.Group>
 
         <Button type="submit" variant="primary">
           Rigistar

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Image } from "react-bootstrap";
 import { logout } from '../actions/userActions'
 
 const Header = () => {
@@ -42,8 +42,8 @@ const Header = () => {
               </LinkContainer>
 
               {userInfo ? (
-                //Aquí va el avatar una vez esté listo
-                <NavDropdown title={userInfo.name} id="username">
+  
+                <NavDropdown title={<div><Image src={userInfo.avatar} fluid roundedCircle width={40} height={40}/></div>} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Perfil</NavDropdown.Item>
                   </LinkContainer>

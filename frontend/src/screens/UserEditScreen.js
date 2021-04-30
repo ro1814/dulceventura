@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
@@ -15,6 +16,7 @@ const UserEditScreen = ({ match, history }) => {
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [uploading, setUploading ] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -41,6 +43,33 @@ const UserEditScreen = ({ match, history }) => {
       }
       
   }, [dispatch, history, userId, user, successUpdate]);
+
+  const uploadFileHandler = async(e) =>{
+    const file = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append('image', file)
+
+    setUploading(true)
+
+    try {
+      const config = { 
+        headers : {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setAvatar(data)
+      setUploading(false)
+      
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+    
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -96,10 +125,13 @@ return (
             <Form.Label>Foto de perfil</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Foto de Perfil"
+              placeholder="Foto de perfil"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
             ></Form.Control>
+            <Form.File id='avatar-file' label='Escoge la foto' custom onChange={uploadFileHandler}> 
+            </Form.File>
+            {uploading && <Loader/>}
           </Form.Group>
 
           <Button type="submit" variant="primary">

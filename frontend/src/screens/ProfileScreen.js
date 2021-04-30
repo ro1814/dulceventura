@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [uploading, setUploading ] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,6 +39,33 @@ const ProfileScreen = ({ location, history }) => {
         }
     }
   }, [dispatch, history, userInfo, user]);
+
+  const uploadFileHandler = async(e) =>{
+    const file = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append('image', file)
+
+    setUploading(true)
+
+    try {
+      const config = { 
+        headers : {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setAvatar(data)
+      setUploading(false)
+      
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+    
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -98,14 +127,17 @@ const ProfileScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="avatar">
-          <Form.Label>Foto de perfil</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Foto de Perfil"
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+            <Form.Label>Foto de perfil</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Foto de perfil"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+            ></Form.Control>
+            <Form.File id='avatar-file' label='Escoge la foto' custom onChange={uploadFileHandler}> 
+            </Form.File>
+            {uploading && <Loader/>}
+          </Form.Group>
 
         <Button type="submit" variant="primary">
           Actualizar perfil

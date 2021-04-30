@@ -12,15 +12,20 @@ import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import RecipeListScreen from "./screens/RecipeListScreen";
 import RecipeEditScreen from "./screens/RecipeEditScreen";
+import ContactScreen from "./screens/ContactScreen";
 
 
 function App() {
+
   return (
+
     <Router>
-      <Header />
+      
+    <Header />
       <main className="py-3">
         <Container>
           <Route path="/login" component={LoginScreen} />
+          <Route path="/contact" component={ContactScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/recipe/:id" component={RecipeScreen} />

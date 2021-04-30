@@ -6,15 +6,22 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listRecipes } from "../actions/recipeActions";
 
-const HomeScreen = () => {
+const HomeScreen = ({history}) => {
   const dispatch = useDispatch();
 
   const recipeList = useSelector((state) => state.recipeList);
   const { loading, error, recipes } = recipeList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    } else {
     dispatch(listRecipes());
-  }, [dispatch]);
+    }
+  }, [history, userInfo, dispatch]);
 
   return (
     <>
