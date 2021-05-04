@@ -111,11 +111,12 @@ const createRecipeReview = asyncHandler(async (req, res) => {
   const recipe = await Recipe.findById(req.params.id);
 
   if (recipe) {
+
     const alreadyReviewed = recipe.reviews.find((r) => r.user.toString() === req.user._id.toString())
 
     if(alreadyReviewed) {
       res.status(400)
-      throw new Error('Receta ya valorada/comentada.')
+      throw new Error('Receta ya valorada o comentada')
     }
 
     const review = {
@@ -129,10 +130,10 @@ const createRecipeReview = asyncHandler(async (req, res) => {
 
     recipe.numReviews = recipe.reviews.length
 
-    recipe.rating = recipe.reviews.reduce((acc, item) => item.rating + acc, 0)
-    / recipe.reviews.length
+    recipe.rating = recipe.reviews.reduce((acc, item) => item.rating + acc, 0) / recipe.reviews.length
 
     await recipe.save()
+    
     res.status(201).json({ message: 'Comentario agregado.'})
 
   } else {

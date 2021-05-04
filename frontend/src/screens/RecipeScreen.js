@@ -12,6 +12,7 @@ import Message from "../components/Message";
 import { RECIPE_CREATE_REVIEW_RESET } from "../constants/recipeConstants";
 
 const RecipeScreen = ({ history, match }) => {
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -32,28 +33,28 @@ const RecipeScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (successRecipeReview) {
-      setRating(0);
-      setComment('');
+      setRating(0)
+      setComment('')
     }
     if (!recipe._id || recipe._id !== match.params.id) {
       dispatch(listRecipeDetails(match.params.id))
       dispatch({ type: RECIPE_CREATE_REVIEW_RESET })
     }
-  }, [dispatch, match, successRecipeReview, recipe]);
+  }, [dispatch, match, successRecipeReview, recipe])
 
   const addToFavHandler = () => {
     history.push(`/fav/${match.params.id}`);
   };
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     dispatch(
       createRecipeReview(match.params.id, {
         rating,
         comment,
       })
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -126,9 +127,14 @@ const RecipeScreen = ({ history, match }) => {
                 ))}
                 <ListGroup.Item>
                   <h2>Escribe tu comentario:</h2>
+                  {successRecipeReview && (
+                    <Message variant='success'>
+                      ¡Comentario agregado con éxito!
+                    </Message>
+                  )}
                   {loadingRecipeReview && <Loader />}
                   {errorRecipeReview && (
-                    <Message variant="danger">{errorRecipeReview}</Message>
+                    <Message variant='danger'>{errorRecipeReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
@@ -148,7 +154,7 @@ const RecipeScreen = ({ history, match }) => {
                         </Form.Control>
                       </Form.Group>
                       <Form.Group controlId="comment">
-                        <Form.Label>Commentario</Form.Label>
+                        <Form.Label>Comentario</Form.Label>
                         <Form.Control
                           as="textarea"
                           row="3"
@@ -156,9 +162,11 @@ const RecipeScreen = ({ history, match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
+
                       <Button type="submit" variant="primary">
                         Comentar
                       </Button>
+
                     </Form>
                   ) : (
                     <Message>

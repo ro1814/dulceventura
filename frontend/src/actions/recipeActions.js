@@ -167,7 +167,10 @@ export const listRecipeDetails = (id) => async (dispatch) => {
     }
   }
 
-  export const createRecipeReview = (recipeId, review) => async (dispatch, getState) => {
+  export const createRecipeReview = (recipeId, review) => async (
+    dispatch,
+    getState
+  ) => {
     try {
       dispatch({
         type: RECIPE_CREATE_REVIEW_REQUEST,
@@ -179,7 +182,7 @@ export const listRecipeDetails = (id) => async (dispatch) => {
   
       const config = {
         headers: {
-          'content-Type': 'application/json',
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
@@ -187,14 +190,16 @@ export const listRecipeDetails = (id) => async (dispatch) => {
       await axios.post(`/api/recipes/${recipeId}/reviews`, review, config)
   
       dispatch({
-        type: RECIPE_CREATE_REVIEW_SUCCESS
+        type: RECIPE_CREATE_REVIEW_SUCCESS,
       })
     } catch (error) {
       const message =
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
-      if (message === 'Not autorizado token fallido.') 
+      if (message === 'Not authorized, token failed') {
+        
+      }
       dispatch({
         type: RECIPE_CREATE_REVIEW_FAIL,
         payload: message,
