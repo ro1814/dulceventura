@@ -1,7 +1,7 @@
 import { createStore, combineReducers,applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { recipeListReducer, recipeDetailsReducer, recipeDeleteReducer, recipeCreateReducer, recipeUpdateReducer } from './reducers/recipeReducers' 
+import { recipeListReducer, recipeDetailsReducer, recipeDeleteReducer, recipeCreateReducer, recipeUpdateReducer, recipeReviewCreateReducer } from './reducers/recipeReducers' 
 import { favReducer } from './reducers/favReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers'
  
@@ -11,6 +11,7 @@ const reducer = combineReducers({
     recipeCreate: recipeCreateReducer,
     recipeDelete: recipeDeleteReducer,
     recipeUpdate: recipeUpdateReducer,
+    recipeReviewCreate: recipeReviewCreateReducer,
     fav: favReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,

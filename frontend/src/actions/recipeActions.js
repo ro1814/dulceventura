@@ -14,7 +14,10 @@ import {
   RECIPE_CREATE_FAIL,
   RECIPE_UPDATE_REQUEST,
   RECIPE_UPDATE_SUCCESS,
-  RECIPE_UPDATE_FAIL
+  RECIPE_UPDATE_FAIL,
+  RECIPE_CREATE_REVIEW_REQUEST,
+  RECIPE_CREATE_REVIEW_SUCCESS,
+  RECIPE_CREATE_REVIEW_FAIL
 } from "../constants/recipeConstants";
 
 export const listRecipes = () => async (dispatch) => {
@@ -159,6 +162,41 @@ export const listRecipeDetails = (id) => async (dispatch) => {
       if (message === 'Not autorizado token fallido.') 
       dispatch({
         type: RECIPE_UPDATE_FAIL,
+        payload: message,
+      })
+    }
+  }
+
+  export const createRecipeReview = (recipeId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: RECIPE_CREATE_REVIEW_REQUEST,
+      })
+  
+      const {
+        userLogin: { userInfo },
+      } = getState()
+  
+      const config = {
+        headers: {
+          'content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+  
+      await axios.post(`/api/recipes/${recipeId}/reviews`, review, config)
+  
+      dispatch({
+        type: RECIPE_CREATE_REVIEW_SUCCESS
+      })
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      if (message === 'Not autorizado token fallido.') 
+      dispatch({
+        type: RECIPE_CREATE_REVIEW_FAIL,
         payload: message,
       })
     }

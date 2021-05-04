@@ -97,4 +97,49 @@ const updateRecipe = asyncHandler(async (req, res) => {
   }
 });
 
-export { getRecipes, getRecipeById, deleteRecipe, createRecipe, updateRecipe };
+// @desc Create new review
+// @route POST /api/recipes/:id/reviews
+// @access Private
+
+const createRecipeReview = asyncHandler(async (req, res) => {
+
+  const {
+    rating,
+    comment
+  } = req.body;
+
+  const recipe = await Recipe.findById(req.params.id);
+
+  if (recipe) {
+    const alreadyReviewed = recipe.reviews.find((r) => r.user.toString() === req.user._id.toString())
+
+    if(alreadyReviewed) {
+      res.status(400)
+      throw new Error('Receta ya valorada/comentada.')
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id
+    }
+
+    recipe.reviews.push(review)
+
+    recipe.numReviews = recipe.reviews.length
+
+    recipe.rating = recipe.reviews.reduce((acc, item) => item.rating + acc, 0)
+    / recipe.reviews.length
+
+    await recipe.save()
+    res.status(201).json({ message: 'Comentario agregado.'})
+
+  } else {
+    res.status(404);
+    throw new Error("Receta no encontrada.");
+  }
+});
+
+
+export { getRecipes, getRecipeById, deleteRecipe, createRecipe, updateRecipe, createRecipeReview };
