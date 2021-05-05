@@ -20,6 +20,10 @@ import {
   RECIPE_CREATE_REVIEW_SUCCESS,
   RECIPE_CREATE_REVIEW_FAIL,
   RECIPE_CREATE_REVIEW_RESET,
+  RECIPE_TOP_SUCCESS,
+  RECIPE_TOP_FAIL,
+  RECIPE_TOP_REQUEST,
+  
 } from "../constants/recipeConstants.js";
 
 export const recipeListReducer = (state = { recipes: [] }, action) => {
@@ -27,7 +31,7 @@ export const recipeListReducer = (state = { recipes: [] }, action) => {
     case RECIPE_LIST_REQUEST:
       return { loading: true, recipes: [] };
     case RECIPE_LIST_SUCCESS:
-      return { loading: false, recipes: action.payload };
+      return { loading: false, recipes: action.payload.recipes, pages: action.payload.pages, page: action.payload.page };
     case RECIPE_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
@@ -107,6 +111,19 @@ export const recipeReviewCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case RECIPE_CREATE_REVIEW_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const recipeTopRatedReducer = (state = { recipes: [] }, action) => {
+  switch (action.type) {
+    case RECIPE_TOP_REQUEST:
+      return { loading: true, recipes: [] }
+    case RECIPE_TOP_SUCCESS:
+      return { loading: false, recipes: action.payload }
+    case RECIPE_TOP_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

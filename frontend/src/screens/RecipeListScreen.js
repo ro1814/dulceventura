@@ -4,14 +4,17 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Paginate from "../components/Paginate";
 import { listRecipes, deleteRecipe, createRecipe } from "../actions/recipeActions";
 import { RECIPE_CREATE_RESET } from '../constants/recipeConstants'
 
 const RecipeListScreen = ({ history, match }) => {
+  const pageNumber = match.params.pageNumber || 1
+
   const dispatch = useDispatch();
 
   const recipeList = useSelector((state) => state.recipeList);
-  const { loading, error, recipes } = recipeList;
+  const { loading, error, recipes, page, pages } = recipeList;
 
   const recipeDelete = useSelector((state) => state.recipeDelete);
   const {
@@ -41,9 +44,9 @@ const RecipeListScreen = ({ history, match }) => {
     if(successCreate){
       history.push(`/admin/recipe/${createdRecipe._id}/edit`)
     } else {
-      dispatch(listRecipes())
+      dispatch(listRecipes('', pageNumber))
     }
-  }, [dispatch, history, userInfo, successDelete, successCreate, createdRecipe]);
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdRecipe, pageNumber]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Estas seguro?")) {
@@ -76,6 +79,7 @@ const RecipeListScreen = ({ history, match }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
+        <>
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
@@ -107,6 +111,8 @@ const RecipeListScreen = ({ history, match }) => {
             ))}
           </tbody>
         </Table>
+        <Paginate pages={pages} page={page} isAdmin={true}/>
+        </>
       )}
     </>
   );

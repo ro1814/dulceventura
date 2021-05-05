@@ -17,14 +17,17 @@ import {
   RECIPE_UPDATE_FAIL,
   RECIPE_CREATE_REVIEW_REQUEST,
   RECIPE_CREATE_REVIEW_SUCCESS,
-  RECIPE_CREATE_REVIEW_FAIL
+  RECIPE_CREATE_REVIEW_FAIL,
+  RECIPE_TOP_REQUEST,
+  RECIPE_TOP_SUCCESS,
+  RECIPE_TOP_FAIL
 } from "../constants/recipeConstants";
 
-export const listRecipes = (keyword = '') => async (dispatch) => {
+export const listRecipes = (keyword = '', pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: RECIPE_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/recipes?keyword=${keyword}`);
+    const { data } = await axios.get(`/api/recipes?keyword=${keyword}&pageNumber=${pageNumber}`);
 
     dispatch({
       type: RECIPE_LIST_SUCCESS,
@@ -206,3 +209,24 @@ export const listRecipeDetails = (id) => async (dispatch) => {
       })
     }
   }
+
+  export const listTopRecipes = () => async (dispatch) => {
+    try {
+      dispatch({ type: RECIPE_TOP_REQUEST });
+  
+      const { data } = await axios.get('/api/recipes/top');
+  
+      dispatch({
+        type: RECIPE_TOP_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: RECIPE_TOP_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

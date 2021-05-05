@@ -6,6 +6,10 @@ import Recipe from "../models/recipeModel.js";
 // @access Public
 
 const getRecipes = asyncHandler(async (req, res) => {
+
+  const pageSize = 4
+  const page = Number(req.query.pageNumber) || 1
+
   const keyword = req.query.keyword
     ? {
         name: {
@@ -15,9 +19,10 @@ const getRecipes = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const recipes = await Recipe.find({ ...keyword });
+  const count = await Recipe.countDocuments({ ...keyword })
+  const recipes = await Recipe.find({ ...keyword }).limit(pageSize).skip(pageSize * (page -1))
 
-  res.json(recipes);
+  res.json({ recipes, page, pages: Math.ceil(count/pageSize) });
 });
 
 // @desc Fetch single recipe
@@ -149,6 +154,17 @@ const createRecipeReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get top rated recipes
+// @route POST /api/recipes/:id/top
+// @access Public
+
+const getTopRecipes = asyncHandler(async (req, res) => {
+
+  const recipes = await Recipe.find({}).sort({ rating: -1 }).limit(5)
+
+  res.json(recipes) 
+});
+
 export {
   getRecipes,
   getRecipeById,
@@ -156,4 +172,5 @@ export {
   createRecipe,
   updateRecipe,
   createRecipeReview,
+  getTopRecipes
 };
