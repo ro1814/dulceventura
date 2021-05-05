@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Carousel, Image } from "react-bootstrap";
 import Loader from "./Loader";
 import Message from "./Message";
+import Rating from "./Rating";
 import { listTopRecipes } from "../actions/recipeActions";
 
 const RecipeTopRated = () => {
@@ -25,13 +26,14 @@ const RecipeTopRated = () => {
     <h1>Recetas más populares</h1>
     <Carousel fade pause='hover' className='bg-dark'>
       {recipes.map((recipe) => (
-        <Carousel.Item key={recipe._id} interval={1000}>
+        <Carousel.Item key={recipe._id} interval={1500}>
           <Link to={`/recipe/${recipe._id}`}>
             <Image src={recipe.image} alt={recipe.name} fluid />
             <Carousel.Caption className='carousel-caption'>
-              <h1>
-                {recipe.name}
-              </h1>
+              <h2>
+                {recipe.name} <Rating value={recipe.rating}
+                    text={`${recipe.numReviews} comentarios`}/>
+              </h2>
             </Carousel.Caption>
           </Link>
         </Carousel.Item>

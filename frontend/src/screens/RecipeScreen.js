@@ -58,12 +58,6 @@ const RecipeScreen = ({ history, match }) => {
 
   return (
     <>
-      <div class="bg_image" style={{
-          backgroundImage: `url(${recipe.backgroundImage})`,
-          backgroundSize: "cover",
-          height: "100vh",
-          color: "#f55A00"
-        }}>
       <Link className="btn btn-dark my-3" to="/" style={{ color: "#F55A00" }}>
         Regresa
       </Link>
@@ -184,9 +178,10 @@ const RecipeScreen = ({ history, match }) => {
               </ListGroup>
             </Col>
           </Row>
+          
         </>
       )}
-      </div>
+  
     </>
   );
 };

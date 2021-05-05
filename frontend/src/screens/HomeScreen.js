@@ -32,6 +32,7 @@ const HomeScreen = ({ history, match }) => {
   return (
     <>
     {!keyword && <RecipeTopRated/>}
+    <br/>
       <h1>Últimas recetas</h1>
       {loading ? (
         <Loader/>

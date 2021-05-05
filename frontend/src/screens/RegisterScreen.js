@@ -75,7 +75,7 @@ const RegisterScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
 
       <Form.Group controlId="name">
-          <Form.Label>Nombre</Form.Label>
+          <Form.Label><i className="far fa-user"></i> Nombre</Form.Label>
           <Form.Control
             type="name"
             placeholder="Escriba su nombre"
@@ -85,7 +85,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label><i className="far fa-envelope"></i> Email</Form.Label>
           <Form.Control
             type="email"
             placeholder="Escriba su email"
@@ -95,7 +95,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Contraseña</Form.Label>
+          <Form.Label><i className="fas fa-lock"></i> Contraseña</Form.Label>
           <Form.Control
             type="password"
             placeholder="Escriba su contraseña"
@@ -115,14 +115,14 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="avatar">
-            <Form.Label>Foto de perfil</Form.Label>
+            <Form.Label><i className="far fa-user-circle"></i> Foto de perfil</Form.Label>
             <Form.Control
               type="text"
               placeholder="Foto de perfil"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
             ></Form.Control>
-            <Form.File id='avatar-file' label='Escoge la foto' custom onChange={uploadFileHandler}> 
+            <Form.File id='avatar-file' label='Escoge la foto' custom onChange={uploadFileHandler}>
             </Form.File>
             {uploading && <Loader/>}
           </Form.Group>
@@ -134,9 +134,9 @@ const RegisterScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          Ya estás registrado?{" "}
+          ¿Ya estás registrado?{" "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Inicia sesión aquí
+          <i className="far fa-user"></i> Inicia sesión aquí
           </Link>
         </Col>
       </Row>

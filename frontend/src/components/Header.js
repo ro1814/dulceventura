@@ -21,7 +21,7 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Dulceventura</Navbar.Brand>
+            <Navbar.Brand><i className='fas fa-home'></i> Dulceventura</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -32,11 +32,11 @@ const Header = () => {
                   <i className="far fa-star"></i> Favoritos
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/recipes">
+              {/* <LinkContainer to="/recipes">
                 <Nav.Link>
                   <i className="far fa-list-alt"></i> Recetas
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/contact">
                 <Nav.Link>
                   <i className="far fa-address-book"></i> Contacto

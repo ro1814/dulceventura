@@ -37,7 +37,7 @@ const LoginScreen = ({ location, history }) => {
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label><i className="far fa-envelope"></i> Email</Form.Label>
           <Form.Control
             type="email"
             placeholder="Escriba su email"
@@ -47,7 +47,7 @@ const LoginScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Contraseña</Form.Label>
+          <Form.Label><i className="fas fa-lock"></i> Contraseña</Form.Label>
           <Form.Control
             type="password"
             placeholder="Escriba su contraseña"
@@ -63,9 +63,9 @@ const LoginScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          No tienes una cuenta? {' '}
+          ¿No tienes una cuenta? {' '}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Regístrate aquí
+          <i className="far fa-list-alt"></i> Regístrate aquí
           </Link>
         </Col>
       </Row>

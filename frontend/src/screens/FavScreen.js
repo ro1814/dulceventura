@@ -12,6 +12,10 @@ import Message from "../components/Message";
 import { addToFav, removeFromFav } from "../actions/favActions";
 
 const FavScreen = ({ match, history }) => {
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  
   const recipeId = match.params.id;
 
   const dispatch = useDispatch();
@@ -31,23 +35,25 @@ const FavScreen = ({ match, history }) => {
 
   return (
     <Row>
-      <Col md={8}>
+      <Col>
           <h1>Favoritos</h1>
-          {favItems.length === 0 ? (<Message> <strong> Tu lista de favoritos está vacía.</strong> <Link to ='/'>Regresa </Link> </Message>) : (
+          <h2>¡Hola, {userInfo.name}!</h2>
+          <h2>Aquí tienes tu espacio de recetas</h2>
+          {favItems.length === 0 ? (<Message> <strong> Tu lista de favoritos está vacía.  <Link to ='/' style={{ color:'F55A00'}}> Regresa </Link> </strong></Message>) : (
               <ListGroup variant = 'flush'>{favItems.map(item=> (
                   <ListGroup.Item key={item.recipe}>
                       <Row>
 
-                          <Col md = {2}>
+                          <Col>
                               <Image src={item.image} alt={item.name} fluid rounded/>
                           </Col>
 
-                          <Col md ={8}>
-                              <Link to={`/recipe/${item.recipe}`}><h2>{item.name}</h2></Link>
+                          <Col>
+                              <Link to={`/recipe/${item.recipe}`}><h1 style={{color: 'black'}}>{item.name}</h1></Link>
                           </Col>
 
-                          <Col md= {2}>
-                              <Button type='button' variant='light' onClick={() => removeFromFavHandler(item.recipe)}><i className='fas fa-trash'></i></Button>
+                          <Col>
+                              <Button type='button' variant='light' onClick={() => removeFromFavHandler(item.recipe)}>Remover <i className='fas fa-trash'></i></Button>
                           </Col>
 
                       </Row>
