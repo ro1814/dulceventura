@@ -11,7 +11,7 @@ const Recipe = ({ recipe }) => {
             </Link>
             <Card.Body>
             <Link to={`/recipe/${recipe._id}`}>
-                <Card.Title as='div'> <strong >Receta: {recipe.name}</strong></Card.Title>
+                <Card.Title as='div'> <strong>Receta: {recipe.name}</strong></Card.Title>
             </Link>
             <Card.Text as='div'>
             <Rating value = {recipe.rating} text = {` ${recipe.numReviews} comentarios`}/>
