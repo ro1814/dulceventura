@@ -6,7 +6,9 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listRecipes } from "../actions/recipeActions";
 
-const HomeScreen = ({history}) => {
+const HomeScreen = ({ history, match }) => {
+  const keyword = match.params.keyword
+
   const dispatch = useDispatch();
 
   const recipeList = useSelector((state) => state.recipeList);
@@ -19,9 +21,9 @@ const HomeScreen = ({history}) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-    dispatch(listRecipes());
+    dispatch(listRecipes(keyword));
     }
-  }, [history, userInfo, dispatch]);
+  }, [history, userInfo, dispatch, keyword]);
 
   return (
     <>

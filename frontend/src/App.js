@@ -35,6 +35,7 @@ function App() {
           <Route path="/admin/recipe/:id/edit" component={RecipeEditScreen} />
           <Route path="/admin/recipelist" component={RecipeListScreen} />
           <Route path="/" component={HomeScreen} exact />
+          <Route path="/search/:keyword" component={HomeScreen} />
         </Container>
       </main>
       <Footer />
