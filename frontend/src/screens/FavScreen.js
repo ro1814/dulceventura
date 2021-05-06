@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, ListGroup, Image, Button } from "react-bootstrap";
+import { Row, Col, Image, Button, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToFav, removeFromFav } from "../actions/favActions";
 
-const FavScreen = ({ match, history }) => {
+const FavScreen = ({ match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -39,7 +39,7 @@ const FavScreen = ({ match, history }) => {
               <strong>
                 {" "}
                 Tu lista de favoritos está vacía.{" "}
-                <Link to="/" style={{ color: "F55A00" }}>
+                <Link to="/" style={{ color: "black" }}>
                   {" "}
                   Regresa{" "}
                 </Link>{" "}
@@ -47,41 +47,40 @@ const FavScreen = ({ match, history }) => {
             </Message>
           ) : (
             <>
-              <ListGroup variant="flush">
+              <Card variant="flush" className='overlay-div'>
                 {favItems.map((item) => (
-                  <ListGroup.Item key={item.recipe}>
-                    <Row className="justify-content-md-center">
-                      <Col xs lg="2">
-                        <Link to={`/recipe/${item.recipe}`}>
-                          <h1 style={{ color: "#F55A00" }}>{item.name}</h1>
-                        </Link>
+                  <Card.Body key={item.recipe}>
+                    <Card.Title>
+                      <Link to={`/recipe/${item.recipe}`}>
+                        <h1 style={{ color: "#F55A00" }}>{item.name}</h1>
+                      </Link>
+                    </Card.Title>
+                    <Card.Text as="div">
+                    <Row>
+                      <Col xs={6} md={4}>
+                      <Image xs={6} md={4}
+                        src={item.image}
+                        alt={item.name}
+                        fluid
+                        rounded
+                        className="favImage"
+                      />
                       </Col>
-
-                      <Col>
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fluid
-                          rounded
-                          className="favImage"
-                        />
-                      </Col>
-
-                      <Col xs lg="2">
-                        <Button
-                          type="button"
-                          variant="dark"
-                          className="btn btn-dark my-3"
-                          style={{ color: "#F55A00" }}
-                          onClick={() => removeFromFavHandler(item.recipe)}
-                        >
-                          Remover <i className="fas fa-trash"></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
+                      <Col xs={6} md={4}>
+                      <Button
+                        type="button"
+                        variant="dark"
+                        className="btn btn-dark my-3"
+                        style={{ color: "#F55A00" }}
+                        onClick={() => removeFromFavHandler(item.recipe)}
+                      >
+                        Remover <i className="fas fa-trash"></i>
+                      </Button></Col>
+                      </Row>
+                    </Card.Text>
+                  </Card.Body>
                 ))}
-              </ListGroup>
+              </Card>
             </>
           )}
         </Col>

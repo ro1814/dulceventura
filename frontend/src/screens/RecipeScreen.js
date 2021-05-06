@@ -78,13 +78,12 @@ const RecipeScreen = ({ history, match }) => {
       ) : (
         <>
           <Row>
-            <Col md={8}>
-              <Image src={recipe.image} alt={recipe.name} fluid />
-            </Col>
-            <Col md={4}>
+            <Col>
+              
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h3>{recipe.name}</h3>
+                <h3>{recipe.name}</h3>
+                <Image src={recipe.image} alt={recipe.name} fluid className='d-block mx-auto m-auto img-fluid favImage'/>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div>
@@ -98,16 +97,6 @@ const RecipeScreen = ({ history, match }) => {
                     value={recipe.rating}
                     text={`${recipe.numReviews} comentarios`}
                   />
-                  {/* <div>
-                    <Button
-                      onClick={addToFavHandler}
-                      className="btn btn-dark"
-                      type="button"
-                      style={{ color: "#F55A00" }}
-                    >
-                      Agregar a favoritos
-                    </Button>
-                  </div> */}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <h4>Ingredientes:</h4>
