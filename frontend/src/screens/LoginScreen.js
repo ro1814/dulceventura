@@ -30,7 +30,7 @@ const LoginScreen = ({ location, history }) => {
   };
 
   return (
-    <>
+    <>    
     
     <FormContainer>
       <h1>Dulceventura</h1>
@@ -39,7 +39,7 @@ const LoginScreen = ({ location, history }) => {
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
 
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} className='header-login__gradient--down'>
         <Form.Group controlId="email">
           <Form.Label><i className="far fa-envelope"></i> Email</Form.Label>
           <Form.Control

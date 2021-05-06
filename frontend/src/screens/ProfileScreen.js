@@ -79,7 +79,7 @@ const ProfileScreen = ({ location, history }) => {
 
   return (
     <Row>
-        <Col>
+        <Col className='header-login__gradient--up'>
       <h2>Perfil</h2>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}

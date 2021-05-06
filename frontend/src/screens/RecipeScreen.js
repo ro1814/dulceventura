@@ -57,11 +57,10 @@ const RecipeScreen = ({ history, match }) => {
 
   return (
     <>
-      
       <Link className="btn btn-dark my-3" to="/" style={{ color: "#F55A00" }}>
         Regresa
       </Link>
-  
+
       <Button
         onClick={addToFavHandler}
         className="btn btn-dark float-right my-3"
@@ -79,30 +78,36 @@ const RecipeScreen = ({ history, match }) => {
         <>
           <Row>
             <Col>
-              
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                <h3>{recipe.name}</h3>
-                <Image src={recipe.image} alt={recipe.name} fluid className='d-block mx-auto m-auto img-fluid favImage'/>
+              <ListGroup variant="flush"  style={{backgroundImage: `url("${recipe.backgroundImage}")`}}>
+                <ListGroup.Item className='header-login__gradient--up'
+                >
+                  <h3>{recipe.name}</h3>
+                  <Image
+                    src={recipe.image}
+                    alt={recipe.name}
+                    fluid
+                    rounded
+                    className="d-block mx-auto m-auto img-fluid favImage "
+                  />
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item style={{backgroundColor:'#2B2B2B'}}>
                   <div>
                     <i className="fas fa-chart-pie"></i> Porciones:
                     {recipe.servings}.
                   </div>
                   <div>
-                    <i className="far fa-clock"></i> Duración: {recipe.time}.
+                    <i className="far fa-clock"></i> Duración: {recipe.time} minutos aprox.
                   </div>
                   <Rating
                     value={recipe.rating}
                     text={`${recipe.numReviews} comentarios`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item style={{backgroundColor:'#2B2B2B'}}>
                   <h4>Ingredientes:</h4>
                   <p>{recipe.ingredients}</p>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item style={{backgroundColor:'#2B2B2B'}}>
                   <h4>Preparación:</h4>
                   <p>{recipe.instructions}</p>
                 </ListGroup.Item>
@@ -110,7 +115,7 @@ const RecipeScreen = ({ history, match }) => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='header-login__gradient--down'>
               <h2>Comentarios:</h2>
               {recipe.reviews.length === 0 && (
                 <Message>Sin comentarios.</Message>
@@ -152,7 +157,7 @@ const RecipeScreen = ({ history, match }) => {
                           <option value="5">5 - Excelente </option>
                         </Form.Control>
                       </Form.Group>
-                      <Form.Group controlId="comment">
+                      <Form.Group controlId="comment" >
                         <Form.Label>Comentario</Form.Label>
                         <Form.Control
                           as="textarea"

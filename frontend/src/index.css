@@ -35,15 +35,41 @@ p{
   color: black;
 }
 
+a .footerText{
+  color: #F55A00;
+}
+.bkOpacity {
+  opacity: .5;
+}
+.recipeBackground{
+  opacity:1;
+
+}
 .overlay-div{
-  height: 90%;
-  width: 100%;
-  position: relative;
-  background-color:#2B2B2B;
-  opacity:.9;
-  border-radius:8px !important;
+  background-color:transparent;
+  opacity: 1;
+  border-radius:8px;
 }
 
+.header-login__gradient--up{
+ 
+  background: rgb(0,0,0);
+  background: -moz-linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffffff",GradientType=1);
+ 
+}
+
+.header-login__gradient--down{
+  
+  background: rgb(0,0,0);
+  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffffff",GradientType=1);
+
+}
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,

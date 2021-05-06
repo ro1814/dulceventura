@@ -28,8 +28,9 @@ const FavScreen = ({ match }) => {
 
   return (
     <>
-      <Row>
-        <Col>
+      <Row >
+      
+        <Col className='header-login__gradient--down'>
           <h1>Favoritos</h1>
           <h2>¡Hola, {userInfo.name}!</h2>
           <h2>Aquí tienes tu espacio de recetas</h2>

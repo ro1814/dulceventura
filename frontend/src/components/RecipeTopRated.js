@@ -24,7 +24,7 @@ const RecipeTopRated = () => {
   ) : (
     <>
       <h1>Top 3 de recetas más populares</h1>
-      <Carousel fade pause="hover" className="bg-dark">
+      <Carousel fade pause="hover" className="bg-dark header-login__gradient--up">
         {recipes.map((recipe) => (
           <Carousel.Item key={recipe._id} interval={2000}>
             <Link to={`/recipe/${recipe._id}`}>

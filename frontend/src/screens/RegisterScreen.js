@@ -72,7 +72,7 @@ const RegisterScreen = ({ location, history }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
 
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} className='header-login__gradient--down'>
 
       <Form.Group controlId="name">
           <Form.Label><i className="far fa-user"></i> Nombre</Form.Label>
@@ -127,7 +127,7 @@ const RegisterScreen = ({ location, history }) => {
             {uploading && <Loader/>}
           </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className='btn btn-dark btn-block' style={{ color: '#F55A00'}}>
           Rigistar
         </Button>
       </Form>
