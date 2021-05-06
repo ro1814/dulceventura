@@ -65,8 +65,8 @@ const RecipeListScreen = ({ history, match }) => {
           <h1>Recetas</h1>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={createRecipeHandler}>
-            <i className="fas fa-plus"></i> Crear receta
+          <Button className="btn btn-dark my-3" style={{ color: "#F55A00" }} onClick={createRecipeHandler}>
+            <i className="fas fa-plus "></i> Crear receta
           </Button>
         </Col>
       </Row>
@@ -80,12 +80,12 @@ const RecipeListScreen = ({ history, match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-        <Table striped bordered hover responsive className="table-sm">
+        <Table striped bordered hover responsive className="table-sm table-secondary" >
           <thead>
             <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th></th>
+              <th>Editar/borrar</th>
             </tr>
           </thead>
           <tbody>

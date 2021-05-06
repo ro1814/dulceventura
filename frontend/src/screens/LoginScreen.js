@@ -30,8 +30,12 @@ const LoginScreen = ({ location, history }) => {
   };
 
   return (
+    <>
+    
     <FormContainer>
-      <h1>Iniciar Sesión</h1>
+      <h1>Dulceventura</h1>
+      <p>By @Gustavomartincheff</p>
+      <h2>Iniciar Sesión</h2>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
 
@@ -56,7 +60,7 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className='btn btn-dark btn-block' style={{ color: '#F55A00'}}>
           Inicie sesión
         </Button>
       </Form>
@@ -70,6 +74,7 @@ const LoginScreen = ({ location, history }) => {
         </Col>
       </Row>
     </FormContainer>
+    </>
   );
 };
 

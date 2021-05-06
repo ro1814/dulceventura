@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import { Card} from 'react-bootstrap'
 import Rating from './Rating'
  
 const Recipe = ({ recipe }) => {
     return (
-        <Card className='my-3 p-3 rounded'>
+        <Card className='my-3 p-3 rounded overlay-div'>
             <Link to={`/recipe/${recipe._id}`}>
                 <Card.Img src= {recipe.image} variant='top' />
             </Link>

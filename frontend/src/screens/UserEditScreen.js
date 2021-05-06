@@ -79,7 +79,7 @@ const UserEditScreen = ({ match, history }) => {
 
 return (
   <>
-    <Link to="/admin/userlist" className="btn btn-light my-3">
+    <Link to="/admin/userlist" className="btn btn-dark my-3" style={{ color: "#F55A00" }}>
       Regresa
     </Link>
     <FormContainer>
@@ -134,7 +134,7 @@ return (
             {uploading && <Loader/>}
           </Form.Group>
 
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="btn btn-dark my-3 btn-block" style={{ color: "#F55A00" }}>
             Actualizar
           </Button>
         </Form>

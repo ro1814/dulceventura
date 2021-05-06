@@ -160,7 +160,7 @@ const createRecipeReview = asyncHandler(async (req, res) => {
 
 const getTopRecipes = asyncHandler(async (req, res) => {
 
-  const recipes = await Recipe.find({}).sort({ rating: -1 }).limit(5)
+  const recipes = await Recipe.find({}).sort({ rating: -1 }).limit(3)
 
   res.json(recipes) 
 });

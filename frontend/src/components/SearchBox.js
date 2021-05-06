@@ -23,7 +23,7 @@ const SearchBox = ({ history }) => {
         placeholder="Busque una receta..."
         className="sm-5"
       ></Form.Control>
-      <Button type="submit" variant="outline-light" className="p-2"><i className="fas fa-search"></i>
+      <Button style={{ color: "#F55A00" }} type="submit" variant="dark" className=" btn btn-dark my-3 p-2"><i className="fas fa-search"></i>
         {" "}
         Buscar
       </Button>

@@ -141,7 +141,7 @@ const ProfileScreen = ({ location, history }) => {
             {uploading && <Loader/>}
           </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className="btn btn-dark my-3 btn-block" style={{ color: "#F55A00" }}>
           Actualizar perfil
         </Button>
       </Form>

@@ -12,9 +12,8 @@ import Message from "../components/Message";
 import { RECIPE_CREATE_REVIEW_RESET } from "../constants/recipeConstants";
 
 const RecipeScreen = ({ history, match }) => {
-
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
 
@@ -24,43 +23,54 @@ const RecipeScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const recipeReviewCreate = useSelector((state) => state.recipeReviewCreate)
+  const recipeReviewCreate = useSelector((state) => state.recipeReviewCreate);
   const {
     success: successRecipeReview,
     loading: loadingRecipeReview,
     error: errorRecipeReview,
-  } = recipeReviewCreate
+  } = recipeReviewCreate;
 
   useEffect(() => {
     if (successRecipeReview) {
-      setRating(0)
-      setComment('')
+      setRating(0);
+      setComment("");
     }
     if (!recipe._id || recipe._id !== match.params.id) {
-      dispatch(listRecipeDetails(match.params.id))
-      dispatch({ type: RECIPE_CREATE_REVIEW_RESET })
+      dispatch(listRecipeDetails(match.params.id));
+      dispatch({ type: RECIPE_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, successRecipeReview, recipe])
+  }, [dispatch, match, successRecipeReview, recipe]);
 
   const addToFavHandler = () => {
     history.push(`/fav/${match.params.id}`);
   };
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(
       createRecipeReview(match.params.id, {
         rating,
         comment,
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
+      
       <Link className="btn btn-dark my-3" to="/" style={{ color: "#F55A00" }}>
         Regresa
       </Link>
+  
+      <Button
+        onClick={addToFavHandler}
+        className="btn btn-dark float-right my-3"
+        type="button"
+        style={{ color: "#F55A00" }}
+      >
+        <i className="fas fa-heart"></i>
+      </Button>
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -88,16 +98,16 @@ const RecipeScreen = ({ history, match }) => {
                     value={recipe.rating}
                     text={`${recipe.numReviews} comentarios`}
                   />
-                  <div>
+                  {/* <div>
                     <Button
                       onClick={addToFavHandler}
-                      className="btn btn-dark btn-block"
+                      className="btn btn-dark"
                       type="button"
                       style={{ color: "#F55A00" }}
                     >
                       Agregar a favoritos
                     </Button>
-                  </div>
+                  </div> */}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <h4>Ingredientes:</h4>
@@ -111,7 +121,7 @@ const RecipeScreen = ({ history, match }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6}>
+            <Col>
               <h2>Comentarios:</h2>
               {recipe.reviews.length === 0 && (
                 <Message>Sin comentarios.</Message>
@@ -128,13 +138,13 @@ const RecipeScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <h2>Escribe tu comentario:</h2>
                   {successRecipeReview && (
-                    <Message variant='success'>
+                    <Message variant="success">
                       ¡Comentario agregado con éxito!
                     </Message>
                   )}
                   {loadingRecipeReview && <Loader />}
                   {errorRecipeReview && (
-                    <Message variant='danger'>{errorRecipeReview}</Message>
+                    <Message variant="danger">{errorRecipeReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
@@ -163,10 +173,14 @@ const RecipeScreen = ({ history, match }) => {
                         ></Form.Control>
                       </Form.Group>
 
-                      <Button type="submit" variant="primary">
+                      <Button
+                        className="btn btn-dark btn-block"
+                        type="submit"
+                        variant="primary"
+                        style={{ color: "#F55A00" }}
+                      >
                         Comentar
                       </Button>
-
                     </Form>
                   ) : (
                     <Message>
@@ -178,10 +192,8 @@ const RecipeScreen = ({ history, match }) => {
               </ListGroup>
             </Col>
           </Row>
-          
         </>
       )}
-  
     </>
   );
 };

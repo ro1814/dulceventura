@@ -34,13 +34,13 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
-      <h1>Users</h1>
+      <h1>Usuarios</h1>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className="table-sm">
+        <Table striped bordered hover responsive className="table-sm table-secondary">
           <thead>
             <tr>
               <th>ID</th>
@@ -56,7 +56,7 @@ const UserListScreen = ({ history }) => {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>
-                  <a href={`mailto: ${user.email}`}>{user.email}</a>
+                  <a className='linkEmail'href={`mailto: ${user.email}`}>{user.email}</a>
                 </td>
                 <td>
                   {user.isAdmin ? (
