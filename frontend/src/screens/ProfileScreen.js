@@ -28,6 +28,7 @@ const ProfileScreen = ({ location, history }) => {
   const { success } = userUpdateProfile;
 
   useEffect(() => {
+    
     if (!userInfo) {
       history.push('/login')
     } else {

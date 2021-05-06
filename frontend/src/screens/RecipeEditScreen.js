@@ -119,7 +119,7 @@ const RecipeEditScreen = ({ match, history }) => {
 
 return (
   <>
-    <Link to="/admin/recipelist" className="btn btn-light my-3">
+    <Link to="/admin/recipelist" className="btn btn-dark my-3 " style={{ color: "#F55A00" }}>
       Regresa
     </Link>
     <FormContainer>
@@ -208,7 +208,7 @@ return (
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="btn btn-dark my-3 btn-block" style={{ color: "#F55A00" }}>
             Actualizar receta
           </Button>
         </Form>

@@ -5,7 +5,8 @@ import { Row, Col, Image, Button, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToFav, removeFromFav } from "../actions/favActions";
 
-const FavScreen = ({ match }) => {
+const FavScreen = ({ match, history }) => {
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -17,10 +18,13 @@ const FavScreen = ({ match }) => {
   const { favItems } = fav;
 
   useEffect(() => {
+    if (!userInfo || !userLogin) {
+      history.push('/login')
+    } else {
     if (recipeId) {
       dispatch(addToFav(recipeId));
-    }
-  }, [dispatch, recipeId]);
+    }}
+  }, [dispatch, recipeId, history, userInfo, userLogin]);
 
   const removeFromFavHandler = (id) => {
     dispatch(removeFromFav(id));
@@ -32,7 +36,7 @@ const FavScreen = ({ match }) => {
       
         <Col className='header-login__gradient--down'>
           <h1>Favoritos</h1>
-          <h2>¡Hola, {userInfo.name}!</h2>
+          <h2>¡Hola!</h2>
           <h2>Aquí tienes tu espacio de recetas</h2>
           {favItems.length === 0 ? (
             <Message>
