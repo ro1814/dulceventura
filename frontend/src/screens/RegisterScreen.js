@@ -128,7 +128,7 @@ const RegisterScreen = ({ location, history }) => {
           </Form.Group>
 
         <Button type="submit" variant="primary" className='btn btn-dark btn-block' style={{ color: '#F55A00'}}>
-          Rigistar
+          Registar
         </Button>
       </Form>
 
