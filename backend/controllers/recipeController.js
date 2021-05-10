@@ -62,12 +62,12 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 
 const createRecipe = asyncHandler(async (req, res) => {
   const recipe = new Recipe({
-    name: "Sample Recipe",
+    name: "Receta ejemplo",
     user: req.user._id,
     image: "/images/sample.jpg",
     backgroundImage: "/images/sample.jpg",
-    time: 10,
-    servings: 5,
+    time: 0,
+    servings: 0,
     ingredients: "ejemplo",
     instructions: "ejemplo",
     numReviews: 0,

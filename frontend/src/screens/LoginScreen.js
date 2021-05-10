@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -34,7 +34,7 @@ const LoginScreen = ({ location, history }) => {
     
     <FormContainer>
       <h1>Dulceventura</h1>
-      <p>By @Gustavomartincheff</p>
+      <Nav.Link target='_blank' href="https://www.instagram.com/gustavomartincheff/"><p>@Gustavomartincheff{" "}<i className="fab fa-instagram"></i></p></Nav.Link>
       <h2>Iniciar Sesión</h2>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}

@@ -22,11 +22,9 @@ const HomeScreen = ({ history, match }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push('/login')
-    } else {
+    
     dispatch(listRecipes(keyword, pageNumber));
-    }
+    
   }, [history, userInfo, dispatch, keyword, pageNumber]);
 
   return (
